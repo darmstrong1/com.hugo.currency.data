@@ -3,6 +3,7 @@ package com.hugo.currency.data;
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 
 import javax.ws.rs.ProcessingException;
 import javax.ws.rs.client.ClientBuilder;
@@ -26,11 +27,21 @@ public class Application {
       usage(buildMsg("Application received the following arguments:", args));
     } else {
       try {
-        displayPriceAndCap(Currency.valueOf(args[0].toUpperCase()));
+        displayPriceAndCap(getCurrency(args[0]));
       } catch (IllegalArgumentException e) {
-        usage(buildMsg("Application received an argument that is not a valid currency type:", args[0]));
+        usage(buildMsg(e.getMessage(), args[0]));
       }
     }
+  }
+
+  private static Currency getCurrency(String id) {
+    List<Currency> currencies = Arrays.asList(Currency.values());
+    Optional<Currency> currency = currencies.stream()
+        .filter(c -> id.toLowerCase().equals(c.id())).findFirst();
+    if (currency.isPresent()) {
+      return currency.get();
+    }
+    throw new IllegalArgumentException("Application received an argument that is not a valid type.");
   }
 
   private static void displayPriceAndCap(Currency currency) {
