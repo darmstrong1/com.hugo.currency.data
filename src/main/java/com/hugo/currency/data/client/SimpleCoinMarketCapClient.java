@@ -24,7 +24,7 @@ public final class SimpleCoinMarketCapClient implements CoinMarketCapClient {
   }
 
   public JsonNode getCurrency(Currency currency) {
-    WebTarget service = client.target(baseURL).path(currency.toString());
+    WebTarget service = client.target(baseURL).path(currency.id());
     Builder builder = service.request(MediaType.APPLICATION_JSON);
     return builder.get(JsonNode.class);
   }

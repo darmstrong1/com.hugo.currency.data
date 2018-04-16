@@ -41,8 +41,8 @@ public class Application {
       JsonNode head = cmcClient.getCurrency(currency);
       JsonResponseParser parser = new JsonResponseParser(head);
 
-      System.out.println(String.format("%s USD price : %s", currency, parser.getValue(PRICE_USD)));
-      System.out.println(String.format("%s Market cap: %s", currency, parser.getValue(MARKET_CAP)));
+      System.out.println(String.format("%s USD price : %s", currency.id(), parser.getValue(PRICE_USD)));
+      System.out.println(String.format("%s Market cap: %s", currency.id(), parser.getValue(MARKET_CAP)));
     } catch (IllegalStateException | IOException | ProcessingException e) {
       System.err.println(
           String.format("The following illegal state prevented us from parsing the response: %s", e.toString()));
@@ -63,7 +63,7 @@ public class Application {
   private static String buildErrPrefix() {
     List<String> currencies = Lists.newArrayList();
     for (Currency c : Currency.values()) {
-      currencies.add(c.toString().toLowerCase());
+      currencies.add(c.id());
     }
     return buildMsg("Application requires one argument only that must be one of the following:", currencies);
   }
