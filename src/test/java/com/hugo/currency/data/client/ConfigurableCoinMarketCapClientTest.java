@@ -7,7 +7,7 @@ import javax.ws.rs.client.Client;
 import org.junit.Assert;
 import org.junit.Test;
 import org.mockito.Mockito;
-import org.mockito.internal.util.reflection.Whitebox;
+import com.hugo.currency.data.Whitebox;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.hugo.currency.data.Currency;
