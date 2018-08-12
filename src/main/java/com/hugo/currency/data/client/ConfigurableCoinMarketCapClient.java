@@ -9,7 +9,7 @@ import javax.ws.rs.client.Client;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.hugo.currency.data.Currency;
 
-import jersey.repackaged.com.google.common.base.Preconditions;
+import com.google.common.base.Preconditions;
 
 public final class ConfigurableCoinMarketCapClient implements CoinMarketCapClient {
 
